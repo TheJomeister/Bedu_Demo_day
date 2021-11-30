@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>To Do</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link id="mystylesheet" rel="stylesheet" href="{% static 'base/css/main.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Allison&family=Inconsolata:wght@200;300&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'base/favicons/favicon.png' %}"/>
+
+    </head>
+
+    <body>
+    <script type="text/javascript">
+        var setTheme = localStorage.getItem('theme')
+        console.log('theme:', setTheme)
+        if(setTheme==null){
+            swapStyle('{% static 'base/css/main.css' %}')
+        }else{
+            swapStyle(setTheme)
+        }
+
+        function swapStyle(sheet){
+            document.getElementById('mystylesheet').href = sheet
+            localStorage.setItem('theme', sheet)
+        }
+
+    </script>
+
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+
+        <div class="social-content">
+            {% block footer %}
+                <ul class="social list-reset">
+                    <li class="social-item"><a href="" class="social-link social-link-fb" target="_blank" aria-label="Link to Facebook"></a></li>
+                    <li class="social-item"><a href="" class="social-link social-link-git" target="_blank" aria-label="Link to Github"></a></li>
+                    <li class="social-item"><a href="" class="social-link social-link-tw" target="_blank" aria-label="Link to Twitter"></a></li>
+                    <li class="social-item"><a href="" class="social-link social-link-vk" target="_blank" aria-label="Link to social-link-vk"></a></li>
+                </ul>
+                
+                <button class="btn btn-light" onclick="swapStyle('{% static 'base/css/main.css' %}')">Light</button>
+                <button class="btn btn-dark" onclick="swapStyle('{% static 'base/css/dark.css' %}')">Dark</button>
+                
+            {% endblock footer %}
+        </div>
+       
+
+    </body>
+
+</html>
